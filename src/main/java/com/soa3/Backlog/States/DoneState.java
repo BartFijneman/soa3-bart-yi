@@ -16,26 +16,26 @@ public class DoneState implements BacklogItemState {
     }
 
     public BacklogItemState toToDo() throws Exception {
-        throw new Exception("Item completed");
+        throw new Exception("Item already todo");
     }
 
     public BacklogItemState toDoing() throws Exception {
-        throw new Exception("Item completed");
+        throw new Exception("Item already doing");
     }
 
     public BacklogItemState toReadyForTesting() throws Exception {
-        throw new Exception("Item completed");
+        throw new Exception("Item already ready for testing");
     }
 
     public BacklogItemState toTesting() throws Exception {
-        throw new Exception("Item completed");
+        throw new Exception("Item already testing");
     }
 
     public BacklogItemState toTested() throws Exception {
-        throw new Exception("Item completed");
+        throw new Exception("Item already tested");
     }
 
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("Item completed");
+        throw new Exception("Item already done");
     }
 }

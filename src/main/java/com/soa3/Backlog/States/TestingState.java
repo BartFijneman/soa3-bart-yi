@@ -21,7 +21,7 @@ public class TestingState implements BacklogItemState {
     }
 
     public BacklogItemState toReadyForTesting() throws Exception {
-        throw new Exception("Already testing");
+        throw new Exception("Already ready for testing");
     }
 
     public BacklogItemState toTesting() throws Exception {

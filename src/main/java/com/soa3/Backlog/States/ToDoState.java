@@ -23,15 +23,15 @@ public class ToDoState implements BacklogItemState {
     }
 
     public BacklogItemState toTesting() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("First complete ready for testing");
     }
 
     public BacklogItemState toTested() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("First complete testing");
     }
 
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("First complete tested");
     }
 
 }

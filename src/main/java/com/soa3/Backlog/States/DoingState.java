@@ -27,11 +27,11 @@ public class DoingState implements BacklogItemState {
     }
 
     public BacklogItemState toTested() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("First complete testing");
     }
 
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("First complete tested");
     }
 
 }

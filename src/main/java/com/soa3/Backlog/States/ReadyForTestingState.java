@@ -36,7 +36,7 @@ public class ReadyForTestingState implements BacklogItemState {
     }
 
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("First complete tested");
     }
 
 }
