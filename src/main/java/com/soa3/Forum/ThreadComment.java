@@ -12,5 +12,7 @@ public class ThreadComment {
         this.message = message;
         this.person = person;
     }
+    
 
+    
 }

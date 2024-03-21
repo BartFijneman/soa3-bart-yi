@@ -6,7 +6,6 @@ import com.soa3.Backlog.States.*;
 import com.soa3.Person.Developer;
 import com.soa3.Person.Person;
 import com.soa3.Person.ProductOwner;
-import com.soa3.Person.Tester;
 import com.soa3.Sprint.Sprint;
 import com.soa3.Sprint.SprintType;
 import org.junit.jupiter.api.Test;
