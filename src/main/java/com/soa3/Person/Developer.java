@@ -9,6 +9,6 @@ public class Developer implements Person{
     }
 
     public String getName() {
-        return name;
+        return "Developer: " + name;
     }
 }

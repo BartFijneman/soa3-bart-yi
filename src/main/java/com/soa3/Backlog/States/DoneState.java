@@ -1,41 +1,40 @@
 package com.soa3.Backlog.States;
 
-import com.soa3.Backlog.BacklogItem;
-import com.soa3.Notification.EmailObserver;
-
 public class DoneState implements BacklogItemState {
+    private Context context;
 
-    private final BacklogItem backlogItem;
-
-    public DoneState(BacklogItem backlogItem) {
-        this.backlogItem = backlogItem;
-
-        // new message to testers
-        new EmailObserver(this.backlogItem);
-        this.backlogItem.notifyObservers("Ready for testing");
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
+    @Override
     public BacklogItemState toToDo() throws Exception {
-        throw new Exception("Item already todo");
+        throw new Exception("Transition from Done to ToDo is not allowed");
     }
 
+    @Override
     public BacklogItemState toDoing() throws Exception {
-        throw new Exception("Item already doing");
+        throw new Exception("Transition from Done to Doing is not allowed");
     }
 
+    @Override
     public BacklogItemState toReadyForTesting() throws Exception {
-        throw new Exception("Item already ready for testing");
+        throw new Exception("Transition from Done to ReadyForTesting is not allowed");
     }
 
+    @Override
     public BacklogItemState toTesting() throws Exception {
-        throw new Exception("Item already testing");
+        throw new Exception("Transition from Done to Testing is not allowed");
     }
 
+    @Override
     public BacklogItemState toTested() throws Exception {
-        throw new Exception("Item already tested");
+        throw new Exception("Transition from Done to Tested is not allowed");
     }
 
+    @Override
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("Item already done");
+        throw new Exception("Already in Done state");
     }
 }

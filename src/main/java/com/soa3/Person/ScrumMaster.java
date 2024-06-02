@@ -9,6 +9,6 @@ public class ScrumMaster implements Person{
     }
 
     public String getName() {
-        return name;
+        return "ScrumMaster: " + name;
     }
 }

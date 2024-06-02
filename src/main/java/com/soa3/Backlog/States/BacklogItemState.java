@@ -8,4 +8,5 @@ public interface BacklogItemState {
     public BacklogItemState toTesting() throws Exception;
     public BacklogItemState toTested() throws Exception;
     public BacklogItemState toDone() throws Exception;
+    public void setContext(Context context);
 }

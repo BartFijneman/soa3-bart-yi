@@ -9,6 +9,6 @@ public class ProductOwner implements Person {
     }
 
     public String getName() {
-        return name;
+        return "Product owner: " + name;
     }
 }

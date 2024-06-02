@@ -1,7 +1,14 @@
 package com.soa3.Notification;
 
-public interface NotificationObserver {
+public class NotificationObserver implements Observer {
+    private NotificationType notificationType;
 
-    void update(String message);
+    public NotificationObserver(NotificationType notificationType) {
+        this.notificationType = notificationType;
+    }
 
+    @Override
+    public void update(String message) {
+        notificationType.sendNotification(message);
+    }
 }

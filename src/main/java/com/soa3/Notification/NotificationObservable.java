@@ -1,22 +1,22 @@
 package com.soa3.Notification;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class NotificationObservable {
+public class NotificationObservable {
+    private List<Observer> observers = new ArrayList<>();
 
-    ArrayList<NotificationObserver> observers = new ArrayList<NotificationObserver>();
-
-    public void addObserver(NotificationObserver newObserver) {
-        observers.add(newObserver);
+    public void addObserver(Observer observer) {
+        observers.add(observer);
     }
 
-    public void deleteObserver(NotificationObserver observer){
+    public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
-    public void notifyObservers(String message){
-        for (NotificationObserver o: observers) {
-            o.update(message);
+    public void notifyAllObservers(String message) {
+        for (Observer observer : observers) {
+            observer.update(message);
         }
     }
 }

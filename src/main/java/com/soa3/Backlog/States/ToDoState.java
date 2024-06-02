@@ -1,37 +1,42 @@
 package com.soa3.Backlog.States;
 
-import com.soa3.Backlog.BacklogItem;
-
 public class ToDoState implements BacklogItemState {
+    private Context context;
 
-    private final BacklogItem backlogItem;
-
-    public ToDoState(BacklogItem backlogItem) {
-        this.backlogItem = backlogItem;
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
+    @Override
     public BacklogItemState toToDo() throws Exception {
-        throw new Exception("Already a todo");
+        // Already in ToDo state, no transition needed
+        throw new Exception("Already in ToDo state");
     }
 
-    public BacklogItemState toDoing() {
-        return new DoingState(this.backlogItem);
+    @Override
+    public BacklogItemState toDoing() throws Exception {
+        context.changeState(new DoingState());
+        return context.state;
     }
 
+    @Override
     public BacklogItemState toReadyForTesting() throws Exception {
-        throw new Exception("First complete doing");
+        throw new Exception("Transition from ToDo to ReadyForTesting is not allowed");
     }
 
+    @Override
     public BacklogItemState toTesting() throws Exception {
-        throw new Exception("First complete ready for testing");
+        throw new Exception("Transition from ToDo to Testing is not allowed");
     }
 
+    @Override
     public BacklogItemState toTested() throws Exception {
-        throw new Exception("First complete testing");
+        throw new Exception("Transition from ToDo to Tested is not allowed");
     }
 
+    @Override
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("First complete tested");
+        throw new Exception("Transition from ToDo to Done is not allowed");
     }
-
 }

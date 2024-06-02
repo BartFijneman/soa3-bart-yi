@@ -1,9 +1,9 @@
 package com.soa3.Sprint;
 
+import com.soa3.Backlog.Backlog;
 import com.soa3.Backlog.BacklogItem;
-import com.soa3.Pipeline.DevPipelineBuilder;
-import com.soa3.Pipeline.IDevops;
-import com.soa3.Pipeline.ReleasePipelineBuilder;
+import com.soa3.Pipeline.ReleasePipeline;
+import com.soa3.Pipeline.IDevOps;
 import com.soa3.Project;
 import com.soa3.Report.ReportExport;
 import com.soa3.Person.Person;
@@ -21,31 +21,35 @@ public class Sprint {
     private LocalDate endDate;
 
     private SprintType type;
-    private SprintStatus status;
-
+    private SprintState status;
     private List<Person> developers;
     private Person scrumMaster;
     private List<BacklogItem> backlogItems;
 
     public ReportExport sprintExportBehavior;
 
+
+    public void setStatus(SprintState status) {
+        this.status = status;
+    }
+
     public Sprint(Project project, String name, LocalDate startDate, LocalDate endDate, SprintType type, List<Person> developers, Person scrumMaster) {
         this.project = project;
         this.name = name;
+        this.type = type;
+        
         this.startDate = startDate;
         this.endDate = endDate;
-        this.type = type;
+        this.status = new NewState();
         this.backlogItems = new ArrayList<BacklogItem>();
-        this.developers = developers;
-        this.scrumMaster = scrumMaster;
     }
 
     public void runPipeline(){
-        IDevops devops;
+        IDevOps devops;
 
         if(this.type == SprintType.RELEASE){
 
-            devops = new ReleasePipelineBuilder(this);
+            devops = new ReleasePipeline();
             devops.createSource();
             devops.createPackages();
             devops.createBuild();
@@ -55,7 +59,7 @@ public class Sprint {
             devops.createDeploy();
         }else{
 
-            devops = new DevPipelineBuilder(this);
+            devops = new ReleasePipeline();
             devops.createSource();
             devops.createPackages();
             devops.createBuild();
@@ -82,5 +86,21 @@ public class Sprint {
 
     public void export(ReportExport sprintExportBehavior) throws Exception {
         sprintExportBehavior.export(this);
+    }
+
+    public void startSprint() {
+        status.startSprint(this);
+    }
+
+    public void finishSprint() {
+        status.finishSprint(this);
+    }
+
+    public void reviewSprint() {
+        status.reviewSprint(this);
+    }
+
+    public void cancelSprint() {
+        status.cancelSprint(this);
     }
 }

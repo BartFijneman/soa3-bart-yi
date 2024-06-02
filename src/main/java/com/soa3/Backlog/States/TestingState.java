@@ -1,53 +1,42 @@
 package com.soa3.Backlog.States;
 
-import com.soa3.Backlog.BacklogItem;
-import com.soa3.Notification.EmailObserver;
-import com.soa3.Person.ScrumMaster;
-
 public class TestingState implements BacklogItemState {
+    private Context context;
 
-    private final BacklogItem backlogItem;
-
-    public TestingState(BacklogItem backlogItem) {
-        this.backlogItem = backlogItem;
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
+    @Override
     public BacklogItemState toToDo() throws Exception {
-        return new ToDoState(this.backlogItem);
+        throw new Exception("Transition from Testing to ToDo is not allowed");
     }
 
+    @Override
     public BacklogItemState toDoing() throws Exception {
-        throw new Exception("Can't go to doing");
+        throw new Exception("Transition from Testing to Doing is not allowed");
     }
 
+    @Override
     public BacklogItemState toReadyForTesting() throws Exception {
-        throw new Exception("Already ready for testing");
+        context.changeState(new ReadyForTestingState());
+        return context.state;
     }
 
+    @Override
     public BacklogItemState toTesting() throws Exception {
-        throw new Exception("Already testing");
+        throw new Exception("Already in Testing state");
     }
 
-    public BacklogItemState toTested() {
-        if(!this.backlogItem.isTestedSuccessfull()){
-
-            /*
-             * Notify scrummaster
-             */
-            if (this.backlogItem.getPerson() instanceof ScrumMaster) {
-
-                new EmailObserver(this.backlogItem);
-                this.backlogItem.notifyObservers("Notify scrum master " + backlogItem.getPerson().getName());
-            }
-
-            return new ToDoState(this.backlogItem);
-        }
-
-        return new TestedState(this.backlogItem);
+    @Override
+    public BacklogItemState toTested() throws Exception {
+        context.changeState(new TestedState());
+        return context.state;
     }
 
+    @Override
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("First complete tests");
+        throw new Exception("Transition from Testing to Done is not allowed");
     }
-
 }

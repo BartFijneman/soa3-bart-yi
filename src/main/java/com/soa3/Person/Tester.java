@@ -9,6 +9,6 @@ public class Tester implements Person{
     }
 
     public String getName() {
-        return name;
+        return "Tester: " + name;
     }
 }

@@ -1,37 +1,48 @@
 package com.soa3.Backlog.States;
 
-import com.soa3.Backlog.BacklogItem;
-
 public class DoingState implements BacklogItemState {
+    private Context context;
 
-    private final BacklogItem backlogItem;
-
-    public DoingState(BacklogItem backlogItem) {
-        this.backlogItem = backlogItem;
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
+    @Override
     public BacklogItemState toToDo() throws Exception {
-        throw new Exception("Already picked");
+        // Transition from Doing to ToDo
+        context.changeState(new ToDoState());
+        return context.state;
     }
 
+    @Override
     public BacklogItemState toDoing() throws Exception {
-        throw new Exception("Already in doing");
+        // Already in Doing state, no transition needed
+        throw new Exception("Already in Doing state");
     }
 
-    public BacklogItemState toReadyForTesting() {
-        return new ReadyForTestingState(this.backlogItem);
+    @Override
+    public BacklogItemState toReadyForTesting() throws Exception {
+        // Transition from Doing to ReadyForTesting
+        context.changeState(new ReadyForTestingState());
+        return context.state;
     }
 
+    @Override
     public BacklogItemState toTesting() throws Exception {
-        throw new Exception("First complete tests");
+        // Transition not allowed directly from Doing to Testing
+        throw new Exception("Transition from Doing to Testing is not allowed");
     }
 
+    @Override
     public BacklogItemState toTested() throws Exception {
-        throw new Exception("First complete testing");
+        // Transition not allowed directly from Doing to Tested
+        throw new Exception("Transition from Doing to Tested is not allowed");
     }
 
+    @Override
     public BacklogItemState toDone() throws Exception {
-        throw new Exception("First complete tested");
+        // Transition not allowed directly from Doing to Done
+        throw new Exception("Transition from Doing to Done is not allowed");
     }
-
 }

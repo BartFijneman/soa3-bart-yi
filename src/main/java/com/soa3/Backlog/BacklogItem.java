@@ -23,7 +23,7 @@ public class BacklogItem extends NotificationObservable {
         this.title = title;
         this.activities = new ArrayList<Activity>();
 
-        this.state = new ToDoState(this);
+        this.state = new ToDoState();
     }
 
     public void toToDo() throws Exception {
